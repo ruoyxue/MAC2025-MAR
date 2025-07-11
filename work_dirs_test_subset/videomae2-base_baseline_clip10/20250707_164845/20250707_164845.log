@@ -1,0 +1,390 @@
+2025/07/07 16:48:46 - mmengine - INFO - 
+------------------------------------------------------------
+System environment:
+    sys.platform: linux
+    Python: 3.10.16 (main, Dec 11 2024, 16:24:50) [GCC 11.2.0]
+    CUDA available: True
+    MUSA available: False
+    numpy_random_seed: 1528193889
+    GPU 0: NVIDIA GeForce RTX 4090
+    CUDA_HOME: /usr/local/cuda-12.8
+    NVCC: Cuda compilation tools, release 12.8, V12.8.61
+    GCC: gcc (Ubuntu 12.3.0-1ubuntu1~22.04) 12.3.0
+    PyTorch: 2.0.1+cu118
+    PyTorch compiling details: PyTorch built with:
+  - GCC 9.3
+  - C++ Version: 201703
+  - Intel(R) oneAPI Math Kernel Library Version 2022.2-Product Build 20220804 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v2.7.3 (Git Hash 6dbeffbae1f23cbbeae17adb7b5b13f1f37c080e)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX2
+  - CUDA Runtime 11.8
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86;-gencode;arch=compute_90,code=sm_90
+  - CuDNN 8.7
+  - Magma 2.6.1
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CUDA_VERSION=11.8, CUDNN_VERSION=8.7.0, CXX_COMPILER=/opt/rh/devtoolset-9/root/usr/bin/c++, CXX_FLAGS= -D_GLIBCXX_USE_CXX11_ABI=0 -fabi-version=11 -Wno-deprecated -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOROCTRACER -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wunused-local-typedefs -Wno-unused-parameter -Wno-unused-function -Wno-unused-result -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-psabi -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Werror=cast-function-type -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_DISABLE_GPU_ASSERTS=ON, TORCH_VERSION=2.0.1, USE_CUDA=ON, USE_CUDNN=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=1, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, 
+
+    TorchVision: 0.15.2+cu118
+    OpenCV: 4.11.0
+    MMEngine: 0.10.7
+
+Runtime environment:
+    cudnn_benchmark: False
+    dist_cfg: {'backend': 'nccl'}
+    mp_cfg: {'mp_start_method': 'fork', 'opencv_num_threads': 0}
+    deterministic: False
+    diff_rank_seed: False
+    seed: 1528193889
+    Distributed launcher: pytorch
+    Distributed training: True
+    GPU number: 1
+------------------------------------------------------------
+
+2025/07/07 16:48:46 - mmengine - INFO - Config:
+ann_file_test = '/data/xueruoyao/ActionAnalysis_dataset/MA-52/annotations/test_subset_list_videos.txt'
+ann_file_train = '/data/xueruoyao/ActionAnalysis_dataset/MA-52/annotations/train_val_list_videos_aug.txt'
+ann_file_val = '/data/xueruoyao/ActionAnalysis_dataset/MA-52/annotations/val_list_videos.txt'
+auto_scale_lr = dict(base_batch_size=64, enable=True)
+data_root = '/data/xueruoyao/ActionAnalysis_dataset/MA-52/train_val'
+data_root_test = '/data/xueruoyao/ActionAnalysis_dataset/MA-52/test_subset/'
+data_root_val = '/data/xueruoyao/ActionAnalysis_dataset/MA-52/val'
+dataset_type = 'VideoDataset'
+default_hooks = dict(
+    checkpoint=dict(
+        interval=1, max_keep_ckpts=5, save_best='auto', type='CheckpointHook'),
+    logger=dict(ignore_last=False, interval=100, type='LoggerHook'),
+    param_scheduler=dict(type='ParamSchedulerHook'),
+    runtime_info=dict(type='RuntimeInfoHook'),
+    sampler_seed=dict(type='DistSamplerSeedHook'),
+    sync_buffers=dict(type='SyncBuffersHook'),
+    timer=dict(type='IterTimerHook'))
+default_scope = 'mmaction'
+env_cfg = dict(
+    cudnn_benchmark=False,
+    dist_cfg=dict(backend='nccl'),
+    mp_cfg=dict(mp_start_method='fork', opencv_num_threads=0))
+file_client_args = dict(io_backend='disk')
+launcher = 'pytorch'
+load_from = '/home/xueruoyao/MAC2025/MAR/work_dirs_train_val/videomae2-base_baseline5_lr0.0002_continue/best_acc_f1_mean_epoch_4.pth'
+log_level = 'INFO'
+log_processor = dict(by_epoch=True, type='LogProcessor', window_size=20)
+model = dict(
+    backbone=dict(
+        depth=12,
+        embed_dims=768,
+        img_size=224,
+        mlp_ratio=4,
+        norm_cfg=dict(eps=1e-06, type='LN'),
+        num_frames=16,
+        num_heads=12,
+        patch_size=16,
+        qkv_bias=True,
+        type='VisionTransformerRes'),
+    cls_head=dict(
+        average_clips='prob',
+        in_channels=768,
+        loss_cls=dict(type='CoarseFocalLoss', use_f1_loss=True),
+        num_classes=52,
+        type='TimeSformerHead'),
+    data_preprocessor=dict(
+        format_shape='NCTHW',
+        mean=[
+            123.675,
+            116.28,
+            103.53,
+        ],
+        std=[
+            58.395,
+            57.12,
+            57.375,
+        ],
+        type='ActionDataPreprocessor'),
+    type='Recognizer3D')
+optim_wrapper = dict(
+    accumulative_counts=32,
+    clip_grad=dict(max_norm=40, norm_type=2),
+    constructor='LearningRateDecayOptimizerConstructor',
+    optimizer=dict(
+        betas=(
+            0.9,
+            0.999,
+        ), lr=0.0001, type='AdamW', weight_decay=0.05),
+    paramwise_cfg=dict(
+        backbone=dict(lr_mult=0.1),
+        decay_rate=0.9,
+        decay_type='layer_wise',
+        num_layers=12))
+param_scheduler = [
+    dict(
+        begin=0,
+        by_epoch=True,
+        convert_to_iter_based=True,
+        end=1,
+        start_factor=0.1,
+        type='LinearLR'),
+    dict(
+        T_max=4,
+        begin=1,
+        by_epoch=True,
+        convert_to_iter_based=True,
+        end=5,
+        eta_min=0,
+        type='CosineAnnealingLR'),
+]
+randomness = dict(deterministic=False, diff_rank_seed=False, seed=None)
+resume = False
+test_cfg = dict(type='TestLoop')
+test_dataloader = dict(
+    batch_size=2,
+    dataset=dict(
+        ann_file=
+        '/data/xueruoyao/ActionAnalysis_dataset/MA-52/annotations/test_subset_list_videos.txt',
+        data_prefix=dict(
+            video='/data/xueruoyao/ActionAnalysis_dataset/MA-52/test_subset/'),
+        pipeline=[
+            dict(io_backend='disk', type='DecordInit'),
+            dict(
+                clip_len=16,
+                num_clips=10,
+                test_mode=True,
+                type='UniformSample'),
+            dict(scale=(
+                224,
+                448,
+            ), train=False, type='DecordDecodeCrop'),
+            dict(input_format='NCTHW', type='FormatShape'),
+            dict(type='PackActionInputs'),
+        ],
+        test_mode=True,
+        type='VideoDataset'),
+    num_workers=8,
+    persistent_workers=True,
+    sampler=dict(shuffle=False, type='DefaultSampler'))
+test_evaluator = [
+    dict(
+        metric_list=(
+            'f1_mean',
+            'top_k_accuracy',
+            'mean_class_accuracy',
+        ),
+        type='AccMetric'),
+    dict(
+        out_file_path=
+        '/home/xueruoyao/MAC2025/MAR/work_dirs_test_subset_continue/videomae2-base_baseline5_lr0.0002_clip10/result.pkl',
+        type='DumpResults'),
+]
+test_pipeline = [
+    dict(io_backend='disk', type='DecordInit'),
+    dict(clip_len=16, num_clips=10, test_mode=True, type='UniformSample'),
+    dict(scale=(
+        224,
+        448,
+    ), train=False, type='DecordDecodeCrop'),
+    dict(input_format='NCTHW', type='FormatShape'),
+    dict(type='PackActionInputs'),
+]
+train_cfg = dict(
+    max_epochs=5, type='EpochBasedTrainLoop', val_begin=1, val_interval=1)
+train_dataloader = dict(
+    batch_size=2,
+    dataset=dict(
+        ann_file=
+        '/data/xueruoyao/ActionAnalysis_dataset/MA-52/annotations/train_val_list_videos_aug.txt',
+        data_prefix=dict(
+            video='/data/xueruoyao/ActionAnalysis_dataset/MA-52/train_val'),
+        pipeline=[
+            dict(io_backend='disk', type='DecordInit'),
+            dict(
+                clip_len=16,
+                num_clips=1,
+                test_mode=False,
+                type='UniformSample'),
+            dict(scale=(
+                224,
+                448,
+            ), train=True, type='DecordDecodeCrop'),
+            dict(type='ColorJitter'),
+            dict(max_area_ratio=0.2, type='RandomErasing'),
+            dict(flip_ratio=0.5, type='Flip'),
+            dict(input_format='NCTHW', type='FormatShape'),
+            dict(type='PackActionInputs'),
+        ],
+        type='VideoDataset'),
+    num_workers=8,
+    persistent_workers=True,
+    sampler=dict(shuffle=True, type='DefaultSampler'))
+train_pipeline = [
+    dict(io_backend='disk', type='DecordInit'),
+    dict(clip_len=16, num_clips=1, test_mode=False, type='UniformSample'),
+    dict(scale=(
+        224,
+        448,
+    ), train=True, type='DecordDecodeCrop'),
+    dict(type='ColorJitter'),
+    dict(max_area_ratio=0.2, type='RandomErasing'),
+    dict(flip_ratio=0.5, type='Flip'),
+    dict(input_format='NCTHW', type='FormatShape'),
+    dict(type='PackActionInputs'),
+]
+val_cfg = dict(type='ValLoop')
+val_dataloader = dict(
+    batch_size=1,
+    dataset=dict(
+        ann_file=
+        '/data/xueruoyao/ActionAnalysis_dataset/MA-52/annotations/val_list_videos.txt',
+        data_prefix=dict(
+            video='/data/xueruoyao/ActionAnalysis_dataset/MA-52/val'),
+        pipeline=[
+            dict(io_backend='disk', type='DecordInit'),
+            dict(
+                clip_len=16, num_clips=4, test_mode=True,
+                type='UniformSample'),
+            dict(scale=(
+                224,
+                448,
+            ), train=False, type='DecordDecodeCrop'),
+            dict(input_format='NCTHW', type='FormatShape'),
+            dict(type='PackActionInputs'),
+        ],
+        test_mode=True,
+        type='VideoDataset'),
+    num_workers=8,
+    persistent_workers=True,
+    sampler=dict(shuffle=False, type='DefaultSampler'))
+val_evaluator = dict(
+    metric_list=(
+        'f1_mean',
+        'top_k_accuracy',
+        'mean_class_accuracy',
+    ),
+    type='AccMetric')
+val_pipeline = [
+    dict(io_backend='disk', type='DecordInit'),
+    dict(clip_len=16, num_clips=4, test_mode=True, type='UniformSample'),
+    dict(scale=(
+        224,
+        448,
+    ), train=False, type='DecordDecodeCrop'),
+    dict(input_format='NCTHW', type='FormatShape'),
+    dict(type='PackActionInputs'),
+]
+vis_backends = [
+    dict(type='LocalVisBackend'),
+]
+visualizer = dict(
+    type='ActionVisualizer', vis_backends=[
+        dict(type='LocalVisBackend'),
+    ])
+work_dir = '/home/xueruoyao/MAC2025/MAR/work_dirs_test_subset_continue/videomae2-base_baseline5_lr0.0002_clip10'
+
+2025/07/07 16:48:48 - mmengine - INFO - Hooks will be executed in the following order:
+before_run:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+before_train:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_train_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) DistSamplerSeedHook                
+ -------------------- 
+before_train_iter:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_train_iter:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+after_train_epoch:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) SyncBuffersHook                    
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_val:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_val_epoch:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) SyncBuffersHook                    
+ -------------------- 
+before_val_iter:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_val_iter:
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_val_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+after_val:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+after_train:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_test:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_test_epoch:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+before_test_iter:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_test_iter:
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_test_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_test:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+after_run:
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+2025/07/07 16:48:49 - mmengine - WARNING - The prefix is not set in metric class DumpResults.
+2025/07/07 16:48:49 - mmengine - INFO - Load checkpoint from /home/xueruoyao/MAC2025/MAR/work_dirs_train_val/videomae2-base_baseline5_lr0.0002_continue/best_acc_f1_mean_epoch_4.pth
+2025/07/07 16:48:49 - mmengine - WARNING - "FileClient" will be deprecated in future. Please use io functions in https://mmengine.readthedocs.io/en/latest/api/fileio.html#file-io
+2025/07/07 16:48:49 - mmengine - WARNING - "FileClient" will be deprecated in future. Please use io functions in https://mmengine.readthedocs.io/en/latest/api/fileio.html#file-io
+2025/07/07 16:48:49 - mmengine - WARNING - "FileClient" will be deprecated in future. Please use io functions in https://mmengine.readthedocs.io/en/latest/api/fileio.html#file-io
+2025/07/07 16:48:49 - mmengine - WARNING - "FileClient" will be deprecated in future. Please use io functions in https://mmengine.readthedocs.io/en/latest/api/fileio.html#file-io
+2025/07/07 16:48:49 - mmengine - WARNING - "FileClient" will be deprecated in future. Please use io functions in https://mmengine.readthedocs.io/en/latest/api/fileio.html#file-io
+2025/07/07 16:48:49 - mmengine - WARNING - "FileClient" will be deprecated in future. Please use io functions in https://mmengine.readthedocs.io/en/latest/api/fileio.html#file-io
+2025/07/07 16:48:49 - mmengine - WARNING - "HardDiskBackend" is the alias of "LocalBackend" and the former will be deprecated in future.
+2025/07/07 16:48:49 - mmengine - WARNING - "HardDiskBackend" is the alias of "LocalBackend" and the former will be deprecated in future.
+2025/07/07 16:48:49 - mmengine - WARNING - "HardDiskBackend" is the alias of "LocalBackend" and the former will be deprecated in future.
+2025/07/07 16:48:49 - mmengine - WARNING - "HardDiskBackend" is the alias of "LocalBackend" and the former will be deprecated in future.
+2025/07/07 16:48:49 - mmengine - WARNING - "HardDiskBackend" is the alias of "LocalBackend" and the former will be deprecated in future.
+2025/07/07 16:48:49 - mmengine - WARNING - "HardDiskBackend" is the alias of "LocalBackend" and the former will be deprecated in future.
+2025/07/07 16:48:49 - mmengine - WARNING - "FileClient" will be deprecated in future. Please use io functions in https://mmengine.readthedocs.io/en/latest/api/fileio.html#file-io
+2025/07/07 16:48:49 - mmengine - WARNING - "HardDiskBackend" is the alias of "LocalBackend" and the former will be deprecated in future.
+2025/07/07 16:48:49 - mmengine - WARNING - "FileClient" will be deprecated in future. Please use io functions in https://mmengine.readthedocs.io/en/latest/api/fileio.html#file-io
+2025/07/07 16:48:49 - mmengine - WARNING - "HardDiskBackend" is the alias of "LocalBackend" and the former will be deprecated in future.
+2025/07/07 16:50:46 - mmengine - INFO - Epoch(test) [100/569]    eta: 0:09:07  time: 1.0004  data_time: 0.0148  memory: 20344  
+2025/07/07 16:52:25 - mmengine - INFO - Epoch(test) [200/569]    eta: 0:06:39  time: 0.9922  data_time: 0.0155  memory: 20344  
+2025/07/07 16:54:05 - mmengine - INFO - Epoch(test) [300/569]    eta: 0:04:43  time: 1.0035  data_time: 0.0148  memory: 20344  
+2025/07/07 16:55:46 - mmengine - INFO - Epoch(test) [400/569]    eta: 0:02:56  time: 1.0106  data_time: 0.0171  memory: 20344  
+2025/07/07 16:57:26 - mmengine - INFO - Epoch(test) [500/569]    eta: 0:01:11  time: 0.9965  data_time: 0.0149  memory: 20344  
+2025/07/07 16:58:37 - mmengine - INFO - Results has been saved to /home/xueruoyao/MAC2025/MAR/work_dirs_test_subset_continue/videomae2-base_baseline5_lr0.0002_clip10/result.pkl.
+2025/07/07 16:58:37 - mmengine - INFO - Epoch(test) [569/569]    acc/f1_mean: 0.0239  acc/top1: 0.0316  acc/top5: 0.1608  acc/mean1: 0.0007  acc/f1_per_fine_class: [0.06132879045996593, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]  acc/f1_per_coarse_class: [0.09380234505862646, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]  data_time: 0.0399  time: 1.0323
